@@ -1,0 +1,142 @@
+:root{
+    color-scheme: light dark;
+    --green: #00b755;
+    --yellow: #daaf38;
+    --red: #ca4754;
+    --black: #222;
+    --gray: #999;
+}
+
+body{
+    background-color: var(--black);
+    font-family: Menlo, monospace;
+    font-size: 20px;
+
+    /*Centrar*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* El body ocupa toda la altura de la ventana */
+    margin: 0; /* Eliminar márgenes predeterminados */
+}
+
+section{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    gap: 4px;
+    max-width: 80vw;
+}
+
+time{
+    color: var(--yellow);
+    font-size: 24px;
+}
+
+input{
+    z-index: -999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    opacity: 0;
+}
+
+/*Esto es para tener una personalización del espacio entre palabras mejor*/
+p{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px 8px;
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.5;
+}
+
+x-letter{
+    color: var(--gray);
+    position: relative; /*Para que "|" se coloque en base a la letra y mno al body*/
+
+    /*Si la letra está activa, coloca delante esto:*/
+    &.active::before{
+        content: '|';
+        color: var(--yellow);
+        font-size: 24px;
+        position: absolute;
+        left: -50%;
+        animation: blink 1s infinite ease-in-out;
+    }
+
+    /*Cambiar la barra de lado cuando sea la última letra*/
+    &.active.is-last::before{
+        left: 50%
+    }
+
+    &.correct{
+        color: var(--green);
+    }
+
+    &.incorrect{
+        color: var(--red);
+    }
+
+}
+
+x-word{
+    border-bottom: 2px solid transparent;
+    transition: border-color 300ms ease-in-out;
+
+    &.marked{
+        border-bottom: 2px solid var(--red);
+    }
+}
+
+h2 {
+    font-weight: 400;
+    opacity: .4;
+    margin: 0;
+    font-size: 32px;
+}
+
+h3 {
+    font-weight: 400;
+    margin: 0;
+    font-size: 48px;
+    color: var(--yellow);
+}
+
+button {
+    background: transparent;
+    border: 0;
+    margin-top: 32px;
+    padding: 8px;
+    opacity: .4;
+    display: inline-block;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    cursor: pointer;
+    border-radius: 16px;
+
+    &:hover {
+        background-color: #444;
+        opacity: 1;
+        scale: 110%;
+    }
+}
+
+#game{
+    display: flex;
+}
+
+#results{
+    display: none;
+}
+
+@keyframes blink {
+    0%, 25% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0;
+    }
+}
