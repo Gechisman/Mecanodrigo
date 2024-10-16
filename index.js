@@ -15,6 +15,8 @@ const INITIAL_TIME = 3; //Tiempo inicial
 let words = []; //Aquí van a ir todas las palabras que hay que escribir
 let currentTime = INITIAL_TIME; //Este tiempo irá bajando cada segundo
 
+let playing;
+
 initGame();
 initEvents();
 
@@ -56,29 +58,29 @@ function initGame() {
     const $firstWord = $paragraph.querySelector('x-word')
     $firstWord.classList.add('active')
     $firstWord.querySelector('x-letter').classList.add('active') //Selecciono la primera letra de la primera palabra
-
-    //Intervalo en el que cada segundo se resta uno, se actualiza y si llega a 0 se par
-    const intervalId = setInterval (() => {
-        currentTime--;
-        $time.textContent = currentTime;
-
-        if (currentTime === 0) {
-            clearInterval(intervalId) //Limpiar el tiempo para que no salga tiempo negativo -1, -2, -3...
-            gameOver();
-        }
-    }, 1000)
-
 }
 
 function initEvents() {
     //En algunos navegadores el "autofocus" no funciona bien
     document.addEventListener('keydown', () => {
         $input.focus()
+        if (!playing) {
+            playing = true
+            const intervalId = setInterval(() => {
+                currentTime--
+                $time.textContent = currentTime
+
+                if (currentTime === 0) {
+                    clearInterval(intervalId)
+                    gameOver()
+                }
+            }, 1000)
+        }
     })
     $input.addEventListener('keydown', oneKeyDown) //Espacios, retrocesos... (podemos evitar el comportamiento por defecto)
     $input.addEventListener('keyup', oneKeyUp) //Para las teclas normales (ya lo ha introducido)
 
-    $input.addEventListener('click', initGame)
+    $button.addEventListener('click', initGame)
 }
 
 function oneKeyDown(event) {
