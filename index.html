@@ -9,6 +9,28 @@
     <title>Mecanodrigo</title>
 </head>
 <body>
+    <div id="popups" class="hidden">
+        <dialog id="customWordAmountModal" class="modalWrapper" open="" style="opacity: 1;">
+            <form class="modal" style="opacity: 1;">
+                <div class="title">Custom word amount</div>
+                <!-- <input type="number" value="1" min="0" max="10000"> -->
+                <div class="tip">
+                    You can start an infinite test by inputting 0. Then, to stop the test, use
+                    the Bail Out feature (
+                    <key>esc</key>
+                    or
+                    <key>ctrl/cmd</key>
+                    +
+                    <key>shift</key>
+                    +
+                    <key>p</key>
+                    &gt; Bail Out)
+                </div>
+                <button>ok</button>
+            </form>
+        </dialog>
+    </div>
+        
     <div id="app" class="content-grid">
         <header>
             <a id="logo" href="/">
@@ -62,50 +84,52 @@
 
                     <div class="spacer rightSpacer"></div>
 
-                    <div class="time">
-                        <button class="textButton" timeconfig="15"><span>15</span></button>
-                        <button class="textButton active" timeconfig="30"><span>30</span></button>
-                        <button class="textButton" timeconfig="60"><span>60</span></button>
-                        <button class="textButton" timeconfig="120"><span>120</span></button>
-                        <button class="textButton" timeconfig="custom">
-                            <i class="fas fa-fw fa-tools"></i>
-                        </button>
-                    </div>
-                    <div class="wordCount hidden">
-                        <button class="textButton" wordcount="10"><span>10</span></button>
-                        <button class="textButton" wordcount="25"><span>25</span></button>
-                        <button class="textButton" wordcount="50"><span>50</span></button>
-                        <button class="textButton" wordcount="100"><span>100</span></button>
-                        <button class="textButton" wordcount="custom">
-                            <i class="fas fa-fw fa-tools"></i>
-                        </button>
-                    </div>
-                    <div class="quoteLength hidden">
-                        <button class="textButton" quotelength="-1">all</button>
-                        <button class="textButton" quotelength="0">short</button>
-                        <button class="textButton" quotelength="1">medium</button>
-                        <button class="textButton" quotelength="2">long</button>
-                        <button class="textButton" quotelength="3">thicc</button>
-                        <button class="textButton favorite hidden" quotelength="-3">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                        <button class="textButton" quotelength="-2">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                    <div class="zen hidden">
-                        <div class="textButton" style="
-                                width: 0;
-                                padding-left: 0;
-                                padding-right: 0;
-                                margin-left: 0;
-                                margin-right: 0;
-                            ">
+                    <div class="optionSection">
+                        <div class="time" mode="timeOptions">
+                            <button class="textButton" timeconfig="15"><span>15</span></button>
+                            <button class="textButton active" timeconfig="30"><span>30</span></button>
+                            <button class="textButton" timeconfig="60"><span>60</span></button>
+                            <button class="textButton" timeconfig="120"><span>120</span></button>
+                            <button class="textButton" timeconfig="custom">
+                                <i class="fas fa-fw fa-tools"></i>
+                            </button>
                         </div>
-                    </div>
+                        <div class="wordCount hidden" mode="wordOptions">
+                            <button class="textButton" wordcount="10"><span>10</span></button>
+                            <button class="textButton" wordcount="25"><span>25</span></button>
+                            <button class="textButton active" wordcount="50"><span>50</span></button>
+                            <button class="textButton" wordcount="100"><span>100</span></button>
+                            <button class="textButton" wordcount="custom">
+                                <i class="fas fa-fw fa-tools"></i>
+                            </button>
+                        </div>
+                        <div class="quoteLength hidden" mode="quoteOptions">
+                            <button class="textButton" quotelength="-1">all</button>
+                            <button class="textButton" quotelength="0">short</button>
+                            <button class="textButton" quotelength="1">medium</button>
+                            <button class="textButton" quotelength="2">long</button>
+                            <button class="textButton" quotelength="3">thicc</button>
+                            <button class="textButton favorite hidden" quotelength="-3">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <button class="textButton" quotelength="-2">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="zen hidden" mode="zenOptions">
+                            <div class="textButton" style="
+                                    width: 0;
+                                    padding-left: 0;
+                                    padding-right: 0;
+                                    margin-left: 0;
+                                    margin-right: 0;
+                                ">
+                            </div>
+                        </div>
 
-                    <div class="customText hidden">
-                        <button class="textButton">change</button>
+                        <div class="customText hidden">
+                            <button class="textButton">change</button>
+                        </div>                        
                     </div>
                 </div>
             </div>
@@ -137,5 +161,6 @@
     </div>
     
     <script type="module" src="index.js"></script>
+    <script src="header.js"></script>
 </body>
 </html>

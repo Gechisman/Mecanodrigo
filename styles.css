@@ -4,7 +4,10 @@
     --yellow: #daaf38;
     --red: #ca4754;
     --black: #222;
+    --dark-black: #1a1919;
     --gray: #999;
+    --sub-color: #646669;
+    --sub-alt-color: #2c2e31;
 
     --roundness: .5rem;
 }
@@ -46,6 +49,14 @@ footer{
     text-decoration: none;
 
     cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.grid {
+    display: grid;
 }
 
 .text{
@@ -172,18 +183,17 @@ h3 {
 button {
     background: transparent;
     border: 0;
-    margin-top: 32px;
-    padding: 8px;
-    opacity: .4;
+    padding: 10px;
+    padding-block: 20px;
+    opacity: .5;
     display: inline-block;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     cursor: pointer;
     border-radius: 16px;
+    transition: transform 0.3s ease-in-out;
 
     &:hover {
-        background-color: #444;
-        opacity: 1;
-        scale: 110%;
+        opacity: 1;        
+        padding-block: 10px;
     }
 }
 
@@ -197,18 +207,43 @@ button {
     box-sizing: border-box;
 }
 
-#testConfig {
+/*ROW*/
+
+.mode .active{
+    color: var(--yellow);
+    opacity: 1;
+    scale: 110%;
+}
+
+.optionSection .active{
+    color: var(--yellow);
+    opacity: 1;
+}
+
+#testConfig{
     width: 100%; /* Que ocupe todo el ancho */
     position: absolute;
     top: 0;
     left: 0;
+
+    --horizontalPadding: 1em;
+    --verticalPadding: 1em;
+    display: grid;
+    font-size: .75rem;
+    gap: .5em;
+    grid-auto-flow: column;
+    height: -moz-max-content;
+    height: max-content;
+    transition: opacity .125s;
+    justify-content: space-around;
+    margin-bottom: 1rem;
 }
 
 #testConfig .row {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--black);
+    background: var(--dark-black);
     border-radius: var(--roundness);
 }
 
@@ -216,6 +251,12 @@ button {
     margin-left: var(--horizontalPadding);
 }
 
+
+#testConfig .time{
+    display: grid;
+    grid-auto-flow: column;
+}
+ 
 #testConfig .mode, #testConfig .time, #testConfig .wordCount, #testConfig .puncAndNum, #testConfig .quoteLength, #testConfig .customText, #testConfig .zen {
     display: grid;
     grid-auto-flow: column;
@@ -223,7 +264,6 @@ button {
 
 button .fas, button .far, button .fab, .button .fas, .button .far, .button .fab, .textButton .fas, .textButton .far, .textButton .fab {
     line-height: 1.25;
-    pointer-events: none;
 }
 
 .fa, .fas {
@@ -250,25 +290,68 @@ button .fas, button .far, button .fab, .button .fas, .button .far, .button .fab,
     transition: .25s;
 }
 
-#testConfig{
-    --horizontalPadding: 1em;
-    --verticalPadding: 1em;
-    display: grid;
-    font-size: .75rem;
-    gap: .5em;
-    grid-auto-flow: column;
-    height: -moz-max-content;
-    height: max-content;
-    width: 100%;
-    transition: opacity .125s;
-    justify-content: space-around;
-    margin-bottom: 1rem;
-}
-
 #testConfig .time, #testConfig .wordCount, #testConfig .customText, #testConfig .zen, #testConfig .quoteLength {
     justify-content: end;
 }
 
+.popupWrapper, .modalWrapper {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    background: #00000080;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    padding: 2rem;
+    border: none;
+    grid-template-columns: 100%;
+}
+
+.popupWrapper .modal, .modalWrapper .modal {
+    background: var(--black);
+    border-radius: var(--roundness);
+    padding: 2rem;
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    max-height: 100%;
+    max-width: 300px;
+    color: var(--gray);
+    overflow-y: auto;
+    box-shadow: 0 0 0 .2em var(--sub-alt-color);
+}
+
+.popupWrapper .modal, .modalWrapper .modal {
+    scrollbar-width: thin;
+    scrollbar-color: var(--sub-color) transparent;
+}
+
+#customWordAmountModal .modal {
+    max-width: 500px;
+}
+
+.popupWrapper .modal>.title, .modalWrapper .modal>.title {
+    font-size: 1.5rem;
+    color: var(--sub-color);
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    appearance: textfield;
+}
+
+#customWordAmountModal .modal .tip {
+    font-size: .75rem;
+    color: var(--gray);
+}
 
 #game{
     display: flex;

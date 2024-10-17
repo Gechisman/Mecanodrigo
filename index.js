@@ -10,6 +10,13 @@ const $wpm = $results.querySelector('#results-wpm')
 const $accuracy = $results.querySelector('#results-accuracy')
 const $button = document.querySelector('#reload-button')
 
+const wordCountButtons = document.querySelectorAll('.wordCount button');
+let wordCountValue = 50;
+const customWordCountInput = document.getElementById('customWordCount');
+const confirmCustomCountButton = document.getElementById('confirmCustomCount');
+
+const customWordForm = document.getElementById('popups');
+
 const INITIAL_TIME = 10; //Tiempo inicial
 
 let words = []; //Aquí van a ir todas las palabras que hay que escribir
@@ -19,6 +26,43 @@ let playing;
 
 initGame();
 initEvents();
+
+
+    wordCountButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Obtén el valor del atributo wordcount del botón
+            wordCountValue = button.getAttribute('wordcount');
+            console.log('wordCountValue: ' + wordCountValue);
+            if (wordCountValue === 'custom') {
+                console.log('entré');
+                // Mostrar el modal y el botón de confirmar
+                customWordForm.classList.remove('hidden');
+            } else {
+                // Es un número predeterminado
+                wordCount = parseInt(wordCountValue, 10);
+                console.log(`Valor seleccionado: ${wordCount}`);
+                initGame(); // Reinicia el juego
+            }
+        });
+    });
+
+    confirmCustomCountButton.addEventListener('click', () => {
+        const customValue = parseInt(customWordCountInput.value, 10);
+        
+        if (!isNaN(customValue) && customValue > 0) {
+            wordCount = customValue;
+            console.log(`Valor personalizado seleccionado: ${wordCount}`);
+            
+            // Reinicia el juego con el número de palabras personalizado
+            initGame(); 
+    
+            // Ocultar el input y el botón de confirmación
+            customWordCountInput.style.display = 'none';
+            confirmCustomCountButton.style.display = 'none';
+        } else {
+            alert('Por favor, ingresa un número válido.');
+        }
+    });
 
 //Configurar el juego antes de empezarlo
 function initGame() {
@@ -32,7 +76,7 @@ function initGame() {
     //Coge el texto al azar y coge solo las 32 primeras palabras
     words = INITIAL_WORDS.toSorted(
         () => Math.random() - 0.5
-    ).slice(0, 100);
+    ).slice(0, wordCountValue);
 
     currentTime = INITIAL_TIME; //Aquí se actualiza el tiempo
     $time.textContent = currentTime; //Aquí le pones al elemento del DOM un valor (en este caso el tiempo restante)
@@ -211,5 +255,4 @@ function gameOver() {
     const wpm = correctWords * 60 / INITIAL_TIME
     $wpm.textContent = wpm
     $accuracy.textContent = `${accuracy.toFixed(2)}%`
-  }
-
+}
