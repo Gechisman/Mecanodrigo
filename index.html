@@ -4,33 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
     <title>Mecanodrigo</title>
 </head>
 <body>
-    <main>
-        <section id="game">
-            <time></time>
-            <p></p>
-            <input type="text" autofocus> <!--Para que pueda escribir directamente en el input-->
-        </section>
+    <div id="app" class="content-grid">
+        <header>
+            <a id="logo" href="/">
+                <div class="icon"><i class="fa-solid fa-keyboard"></i></div>
+                <h1 class="text">mecanodrigo</h1>
+            </a>
+            <nav>
+                <a id="login-link" href="/login" title="Inicio de sesión">
+                    <i class="far fa-user"></i> <!-- Icono de monigote -->
+                </a>
+            </nav>                
+        </header>
+        <main>
+            <div id="testConfig" class="full-width">
+                <div class="row">
+                    <div class="puncAndNum">
+                        <button class="textButton punctuationMode">
+                            <i class="fas fa-fw fa-at"></i>
+                            punctuation
+                        </button>
+                        <button class="textButton numbersMode">
+                            <i class="fas fa-fw fa-hashtag"></i>
+                            numbers
+                        </button>
+                    </div>
 
-        <section id="results">
-            <h2>Wpm</h2>            
-            <h3 id="results-wpm"></h3>
+                    <div class="spacer leftSpacer"></div>
 
-            <h2>Accuracy</h2>
-            <h3 id="results-accuracy"></h3>
+                    <div class="mode">
+                        <button class="textButton active" mode="time">
+                            <i class="fas fa-fw fa-clock"></i>
+                            time
+                        </button>
+                        <button class="textButton" mode="words">
+                            <i class="fas fa-fw fa-font"></i>
+                            words
+                        </button>
+                        <button class="textButton" mode="quote">
+                            <i class="fas fa-fw fa-quote-left"></i>
+                            quote
+                        </button>
+                        <button class="textButton" mode="zen">
+                            <i class="fas fa-fw fa-mountain"></i>
+                            zen
+                        </button>
+                        <button class="textButton" class="textButton" mode="custom">
+                            <i class="fas fa-fw fa-wrench"></i>
+                            custom
+                        </button>
+                    </div>
 
-            <button id="reload-button">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747" />
-                    <path d="M20 4v5h-5" />
-                </svg>
-            </button>
-        </section>
-    </main>
+                    <div class="spacer rightSpacer"></div>
+
+                    <div class="time">
+                        <button class="textButton" timeconfig="15"><span>15</span></button>
+                        <button class="textButton active" timeconfig="30"><span>30</span></button>
+                        <button class="textButton" timeconfig="60"><span>60</span></button>
+                        <button class="textButton" timeconfig="120"><span>120</span></button>
+                        <button class="textButton" timeconfig="custom">
+                            <i class="fas fa-fw fa-tools"></i>
+                        </button>
+                    </div>
+                    <div class="wordCount hidden">
+                        <button class="textButton" wordcount="10"><span>10</span></button>
+                        <button class="textButton" wordcount="25"><span>25</span></button>
+                        <button class="textButton" wordcount="50"><span>50</span></button>
+                        <button class="textButton" wordcount="100"><span>100</span></button>
+                        <button class="textButton" wordcount="custom">
+                            <i class="fas fa-fw fa-tools"></i>
+                        </button>
+                    </div>
+                    <div class="quoteLength hidden">
+                        <button class="textButton" quotelength="-1">all</button>
+                        <button class="textButton" quotelength="0">short</button>
+                        <button class="textButton" quotelength="1">medium</button>
+                        <button class="textButton" quotelength="2">long</button>
+                        <button class="textButton" quotelength="3">thicc</button>
+                        <button class="textButton favorite hidden" quotelength="-3">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <button class="textButton" quotelength="-2">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="zen hidden">
+                        <div class="textButton" style="
+                                width: 0;
+                                padding-left: 0;
+                                padding-right: 0;
+                                margin-left: 0;
+                                margin-right: 0;
+                            ">
+                        </div>
+                    </div>
+
+                    <div class="customText hidden">
+                        <button class="textButton">change</button>
+                    </div>
+                </div>
+            </div>
+
+            <section id="game">
+                <time></time>
+                <p></p>
+                <input type="text" autofocus> <!--Para que pueda escribir directamente en el input-->
+            </section>
+    
+            <section id="results">
+                <h2>Wpm</h2>            
+                <h3 id="results-wpm"></h3>
+    
+                <h2>Accuracy</h2>
+                <h3 id="results-accuracy"></h3>
+    
+                <button id="reload-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747" />
+                        <path d="M20 4v5h-5" />
+                    </svg>
+                </button>
+            </section>
+        </main>
+        <footer id="footer"></footer>
+    </div>
+    
     <script type="module" src="index.js"></script>
 </body>
 </html>

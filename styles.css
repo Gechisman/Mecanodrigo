@@ -5,6 +5,8 @@
     --red: #ca4754;
     --black: #222;
     --gray: #999;
+
+    --roundness: .5rem;
 }
 
 body{
@@ -18,6 +20,67 @@ body{
     align-items: center;
     height: 100vh; /* El body ocupa toda la altura de la ventana */
     margin: 0; /* Eliminar márgenes predeterminados */
+}
+
+header, footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: var(--dark-gray);
+}
+
+footer{
+    background-color: #00b755;
+}
+
+#logo {
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+    gap: 0.5rem; 
+
+    padding: 0.35rem 0.25rem;
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+    white-space: nowrap;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.text{
+    font-family: Lexend Deca, sans-serif;
+    font-weight: unset;
+    color: rgb(255, 250, 244);
+}
+
+.icon{
+    color: var(--yellow);
+    padding-top: 5px;
+}
+
+nav a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--white);
+    font-size: 1.2rem;
+}
+
+nav a i {
+    margin-left: 8px; /* Espacio entre el icono y el borde */
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrar el contenido verticalmente */
+    align-items: center;
+    padding: 16px;
+    gap: 16px; /* Espacio entre elementos */
+    background-color: var(--dark-gray); /* Color de fondo para distinguir */
+    height: 70vh;
+    position: relative;
 }
 
 section{
@@ -124,12 +187,99 @@ button {
     }
 }
 
+.content-grid {
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* Header y footer automáticos, main ocupa el resto */
+    height: 100vh; /* Ocupar toda la altura de la pantalla */
+    width: 100%; /* Ocupar todo el ancho disponible */
+    max-width: 1500px; /* Ancho máximo para que se vea bien en pantallas grandes */
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+#testConfig {
+    width: 100%; /* Que ocupe todo el ancho */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#testConfig .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--black);
+    border-radius: var(--roundness);
+}
+
+#testConfig .mode .textButton:first-child, #testConfig .time .textButton:first-child, #testConfig .wordCount .textButton:first-child, #testConfig .puncAndNum .textButton:first-child, #testConfig .quoteLength .textButton:first-child, #testConfig .customText .textButton:first-child, #testConfig .zen .textButton:first-child {
+    margin-left: var(--horizontalPadding);
+}
+
+#testConfig .mode, #testConfig .time, #testConfig .wordCount, #testConfig .puncAndNum, #testConfig .quoteLength, #testConfig .customText, #testConfig .zen {
+    display: grid;
+    grid-auto-flow: column;
+}
+
+button .fas, button .far, button .fab, .button .fas, .button .far, .button .fab, .textButton .fas, .textButton .far, .textButton .fab {
+    line-height: 1.25;
+    pointer-events: none;
+}
+
+.fa, .fas {
+    font-family: Font Awesome;
+    font-weight: 300;
+}
+
+#testConfig .spacer {
+    height: auto;
+    width: .5em;
+    border-radius: calc(var(--roundness) / 2);
+    background: var(--yellow);
+    margin: .75em 0;
+    transition: .25s;
+}
+
+/*Separa punc&num y el modo*/
+#testConfig .spacer {
+    height: auto;
+    width: .5em;
+    border-radius: calc(var(--roundness) / 2);
+    background: var(--black);
+    margin: .75em 0;
+    transition: .25s;
+}
+
+#testConfig{
+    --horizontalPadding: 1em;
+    --verticalPadding: 1em;
+    display: grid;
+    font-size: .75rem;
+    gap: .5em;
+    grid-auto-flow: column;
+    height: -moz-max-content;
+    height: max-content;
+    width: 100%;
+    transition: opacity .125s;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+}
+
+#testConfig .time, #testConfig .wordCount, #testConfig .customText, #testConfig .zen, #testConfig .quoteLength {
+    justify-content: end;
+}
+
+
 #game{
     display: flex;
 }
 
 #results{
     display: none;
+}
+
+#app{
+    padding-block: .5rem;
 }
 
 @keyframes blink {

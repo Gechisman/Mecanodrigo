@@ -10,7 +10,7 @@ const $wpm = $results.querySelector('#results-wpm')
 const $accuracy = $results.querySelector('#results-accuracy')
 const $button = document.querySelector('#reload-button')
 
-const INITIAL_TIME = 3; //Tiempo inicial
+const INITIAL_TIME = 10; //Tiempo inicial
 
 let words = []; //Aquí van a ir todas las palabras que hay que escribir
 let currentTime = INITIAL_TIME; //Este tiempo irá bajando cada segundo
