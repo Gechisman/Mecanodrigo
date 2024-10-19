@@ -109,7 +109,7 @@ time{
     font-size: 24px;
 }
 
-input{
+section input{
     z-index: -999;
     position: absolute;
     top: 0;
@@ -193,7 +193,6 @@ button {
 
     &:hover {
         opacity: 1;        
-        padding-block: 10px;
     }
 }
 
@@ -275,17 +274,7 @@ button .fas, button .far, button .fab, .button .fas, .button .far, .button .fab,
     height: auto;
     width: .5em;
     border-radius: calc(var(--roundness) / 2);
-    background: var(--yellow);
-    margin: .75em 0;
-    transition: .25s;
-}
-
-/*Separa punc&num y el modo*/
-#testConfig .spacer {
-    height: auto;
-    width: .5em;
-    border-radius: calc(var(--roundness) / 2);
-    background: var(--black);
+    background: var(--red);
     margin: .75em 0;
     transition: .25s;
 }
