@@ -17,18 +17,75 @@ let inputWordsValue;
 let wordCountValue = 50;
 let wordCount;
 
-const customWordForm = document.getElementById('popups');
+const timeButtons = document.querySelectorAll('.time button');
+const buttonOkCustomTime = document.querySelector('#buttonOkCustomTime');
+const timeInput = document.getElementById('timeInput');
+const customTimeForm = document.getElementById('timePopup');
+
+let customTimeValue;
+let selectedTime;
+
+const customWordForm = document.getElementById('wordPopup');
 
 const INITIAL_TIME = 10; //Tiempo inicial
+let elapsedTime = 0; // Registrar el tiempo transcurrido
 
 let words = []; //Aquí van a ir todas las palabras que hay que escribir
-let currentTime = INITIAL_TIME; //Este tiempo irá bajando cada segundo
+let currentTime;
+let timeValue = INITIAL_TIME; //Este tiempo irá bajando cada segundo
 
 let playing;
 
+setupTimeButtons();
 setupWordCountButtons()
 initGame();
 initEvents();
+
+function setupTimeButtons() {
+    timeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            selectedTime = button.getAttribute('timeconfig');
+            if (selectedTime === 'custom') {
+                // Mostrar el formulario de tiempo personalizado y enfocar el input
+                customTimeForm.classList.remove('hidden');
+                timeInput.focus();
+                $input.disabled = true;
+
+                buttonOkCustomTime.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    customTimeValue = parseInt(timeInput.value, 10);
+                    console.log(`Tiempo personalizado ingresado: ${customTimeValue} segundos`);
+                    
+                    if (!isNaN(customTimeValue) && customTimeValue > 0 && customTimeValue <= 3600) {
+                        timeValue = customTimeValue;
+                
+                        // Cerrar el formulario de tiempo personalizado
+                        customTimeForm.classList.add('hidden');
+                        $input.disabled = false;
+                        $input.focus();
+                
+                        initGame(); // Reinicia el juego con el tiempo personalizado
+                    } else {
+                        alert('Por favor, ingresa un número válido entre 1 y 3600.');
+                    }
+                })
+            } else {
+                //Tiempo predeterminado
+                timeValue = parseInt(selectedTime, 10);
+                console.log(`Tiempo seleccionado: ${timeValue} segundos`);
+
+                // Establecer la clase 'active' solo en el botón seleccionado
+                timeButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Reiniciar el juego con el nuevo tiempo
+                initGame();
+            }
+        });
+    });
+}
+
+
 
 function setupWordCountButtons(){
     wordCountButtons.forEach(button => {
@@ -86,7 +143,7 @@ function initGame() {
         ).slice(0, wordCountValue);
     }
 
-    currentTime = INITIAL_TIME; //Aquí se actualiza el tiempo
+    currentTime = timeValue; //Aquí se actualiza el tiempo
     $time.textContent = currentTime; //Aquí le pones al elemento del DOM un valor (en este caso el tiempo restante)
 
     /*Itera sobre cada palabra, la divide en letras (para poder manejar cada letra individualmente) 
@@ -120,6 +177,7 @@ function initEvents() {
             playing = true
             const intervalId = setInterval(() => {
                 currentTime--
+                elapsedTime++;
                 $time.textContent = currentTime;
 
                 if (currentTime === 0) {
@@ -265,13 +323,16 @@ function gameOver() {
     //Calcular la precision
     const accuracy = totalLetters > 0
       ? (correctLetter / totalLetters) * 100
-        : 0
+        : 0;
 
     //Calcular WPM    
     /*Muestra la precisión calculada ($accuracy), 
     formateada con dos decimales y un símbolo de porcentaje*/
-    const wpm = correctWords * 60 / INITIAL_TIME
-    $wpm.textContent = wpm
+    const wpm = elapsedTime > 0
+        ? (correctWords * 60) / elapsedTime
+        : 0;
+    
+    $wpm.textContent = wpm.toFixed(2);
     $accuracy.textContent = `${accuracy.toFixed(2)}%`
 }
 
