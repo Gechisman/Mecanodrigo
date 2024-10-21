@@ -246,7 +246,7 @@ button {
     border-radius: var(--roundness);
 }
 
-#testConfig .mode .textButton:first-child, #testConfig .time .textButton:first-child, #testConfig .wordCount .textButton:first-child, #testConfig .puncAndNum .textButton:first-child, #testConfig .quoteLength .textButton:first-child, #testConfig .customText .textButton:first-child, #testConfig .zen .textButton:first-child {
+#testConfig .mode .textButton:first-child, #testConfig .time .textButton:first-child, #testConfig .wordCount .textButton:first-child, #testConfig .customText .textButton:first-child {
     margin-left: var(--horizontalPadding);
 }
 
@@ -256,7 +256,7 @@ button {
     grid-auto-flow: column;
 }
  
-#testConfig .mode, #testConfig .time, #testConfig .wordCount, #testConfig .puncAndNum, #testConfig .quoteLength, #testConfig .customText, #testConfig .zen {
+#testConfig .mode, #testConfig .time, #testConfig .wordCount, #testConfig .customText {
     display: grid;
     grid-auto-flow: column;
 }
@@ -279,7 +279,7 @@ button .fas, button .far, button .fab, .button .fas, .button .far, .button .fab,
     transition: .25s;
 }
 
-#testConfig .time, #testConfig .wordCount, #testConfig .customText, #testConfig .zen, #testConfig .quoteLength {
+#testConfig .time, #testConfig .wordCount, #testConfig .customText {
     justify-content: end;
 }
 

@@ -173,32 +173,11 @@ function initEvents() {
     //En algunos navegadores el "autofocus" no funciona bien    
     document.addEventListener('keydown', () => {
         $input.focus()
-        if (!playing) {
-            playing = true
-            const intervalId = setInterval(() => {
-                currentTime--
-                elapsedTime++;
-                $time.textContent = currentTime;
-
-                if (currentTime === 0) {
-                    clearInterval(intervalId)
-                    gameOver()
-                }
-
-                    const $lastWord = $paragraph.querySelector('x-word:last-child');
-                    const allLettersCorrect = !$lastWord.querySelector('x-letter:not(.correct)');
-
-                    // Si la última palabra está completamente escrita y no quedan letras incorrectas, se termina el juego
-                    if (allLettersCorrect) {
-                        clearInterval(intervalId);
-                        gameOver();
-                    }
-                
-            }, 1000)
-        }
+        $input.addEventListener('keydown', startGameTimer, { once: true });
+        $input.addEventListener('keydown', oneKeyDown) //Espacios, retrocesos... (podemos evitar el comportamiento por defecto)
+        $input.addEventListener('keyup', oneKeyUp) //Para las teclas normales (ya lo ha introducido)
+    
     })
-    $input.addEventListener('keydown', oneKeyDown) //Espacios, retrocesos... (podemos evitar el comportamiento por defecto)
-    $input.addEventListener('keyup', oneKeyUp) //Para las teclas normales (ya lo ha introducido)
 
     $button.addEventListener('click', initGame)
 }
@@ -307,6 +286,7 @@ function oneKeyUp() {
     
 }
 
+//Game Over
 function gameOver() {
     //Muestra los resultados y oculta el juego
     $game.style.display = 'none'
@@ -358,4 +338,32 @@ function updateWordList(count) {
     $firstWord.classList.add('active');
     $firstWord.querySelector('x-letter').classList.add('active'); // Selecciono la primera letra de la primera palabra
     $input.addEventListener('keydown', initEvents, { once: true });
+}
+
+//Tiempo
+function startGameTimer() {
+    if (!playing) {
+        playing = true;
+        elapsedTime = 0;
+        const intervalId = setInterval(() => {
+            currentTime--;
+            elapsedTime++;
+            $time.textContent = currentTime;
+
+            // Verificar si se acabó el tiempo
+            if (currentTime === 0) {
+                clearInterval(intervalId);
+                gameOver();
+            }
+
+            // Verificar si el usuario ha completado todas las palabras
+            const $lastWord = $paragraph.querySelector('x-word:last-child');
+            const allLettersCorrect = !$lastWord.querySelector('x-letter:not(.correct)');
+
+            if (allLettersCorrect) {
+                clearInterval(intervalId);
+                gameOver();
+            }
+        }, 1000);
+    }
 }

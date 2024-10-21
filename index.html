@@ -11,9 +11,9 @@
 <body>
     <div id="wordPopup" class="hidden">
         <dialog id="customWordAmountModal" class="modalWrapper" open="" style="opacity: 1;">
-            <form class="modal" style="opacity: 1;">
+            <form id="customWordForm" class="modal" style="opacity: 1;">
                 <div class="title">Custom word amount</div>
-                <input id="wordsInput" type="number" value="1" min="0" max="10000">
+                <input id="wordsInput" name="wordsInput" type="number" value="1" min="0" max="10000">
                 
                 <button id="buttonOkCustomWords">Ok</button>
             </form>
@@ -24,7 +24,7 @@
         <dialog id="customTimeModal" class="modalWrapper">
             <form class="modal" id="customTimeForm">
                 <div class="title">Custom Time</div>
-                <input type="number" id="timeInput" value="1" min="1" max="3600" required>
+                <input type="number" id="timeInput" name="timeInput" value="1" min="1" max="3600" required>
                 <div class="tip">
                     Enter a time in seconds. Maximum: 3600 seconds (1 hour).
                 </div>
@@ -48,39 +48,21 @@
         <main>
             <div id="testConfig" class="full-width">
                 <div class="row">
-                    <div class="puncAndNum">
-                        <button class="textButton punctuationMode">
-                            <i class="fas fa-fw fa-at"></i>
-                            punctuation
-                        </button>
-                        <button class="textButton numbersMode">
-                            <i class="fas fa-fw fa-hashtag"></i>
-                            numbers
-                        </button>
-                    </div>
 
                     <div class="spacer leftSpacer"></div>
 
                     <div class="mode">
                         <button class="textButton active" mode="time">
                             <i class="fas fa-fw fa-clock"></i>
-                            time
+                            Time
                         </button>
                         <button class="textButton" mode="words">
                             <i class="fas fa-fw fa-font"></i>
-                            words
-                        </button>
-                        <button class="textButton" mode="quote">
-                            <i class="fas fa-fw fa-quote-left"></i>
-                            quote
+                            Words
                         </button>
                         <button class="textButton" mode="zen">
-                            <i class="fas fa-fw fa-mountain"></i>
-                            zen
-                        </button>
-                        <button class="textButton" class="textButton" mode="custom">
-                            <i class="fas fa-fw fa-wrench"></i>
-                            custom
+                            <i class="fa-solid fa-eye-slash"></i>
+                            Hidden
                         </button>
                     </div>
 
@@ -104,34 +86,7 @@
                             <button class="textButton" wordcount="custom">
                                 <i class="fas fa-fw fa-tools"></i>
                             </button>
-                        </div>
-                        <div class="quoteLength hidden" mode="quoteOptions">
-                            <button class="textButton" quotelength="-1">all</button>
-                            <button class="textButton" quotelength="0">short</button>
-                            <button class="textButton" quotelength="1">medium</button>
-                            <button class="textButton" quotelength="2">long</button>
-                            <button class="textButton" quotelength="3">thicc</button>
-                            <button class="textButton favorite hidden" quotelength="-3">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <button class="textButton" quotelength="-2">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                        <div class="zen hidden" mode="zenOptions">
-                            <div class="textButton" style="
-                                    width: 0;
-                                    padding-left: 0;
-                                    padding-right: 0;
-                                    margin-left: 0;
-                                    margin-right: 0;
-                                ">
-                            </div>
-                        </div>
-
-                        <div class="customText hidden">
-                            <button class="textButton">change</button>
-                        </div>                        
+                        </div>                       
                     </div>
                 </div>
             </div>
@@ -139,7 +94,7 @@
             <section id="game">
                 <time></time>
                 <p></p>
-                <input type="text" autofocus> <!--Para que pueda escribir directamente en el input-->
+                <input id="gameInput" name="gameInput" type="text" autofocus> <!--Para que pueda escribir directamente en el input-->
             </section>
     
             <section id="results">
