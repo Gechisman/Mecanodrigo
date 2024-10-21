@@ -35,7 +35,6 @@ function setupWordCountButtons(){
         button.addEventListener('click', () => {
             // Obtén el valor del atributo wordcount del botón
             wordCountValue = button.getAttribute('wordcount');
-            console.log('wordCountValue: ' + wordCountValue);
             if (wordCountValue === 'custom') {                
                 // Mostrar el modal y el botón de confirmar
                 customWordForm.classList.remove('hidden');
@@ -87,12 +86,6 @@ function initGame() {
         ).slice(0, wordCountValue);
     }
 
-
-
-    console.log('init: ' + words);
-    console.log('INITIAL_WORDS: ' + INITIAL_WORDS);
-    console.log('wordCountValue: ' + wordCountValue);
-
     currentTime = INITIAL_TIME; //Aquí se actualiza el tiempo
     $time.textContent = currentTime; //Aquí le pones al elemento del DOM un valor (en este caso el tiempo restante)
 
@@ -120,19 +113,29 @@ function initGame() {
 }
 
 function initEvents() {
-    //En algunos navegadores el "autofocus" no funciona bien
+    //En algunos navegadores el "autofocus" no funciona bien    
     document.addEventListener('keydown', () => {
         $input.focus()
         if (!playing) {
             playing = true
             const intervalId = setInterval(() => {
                 currentTime--
-                $time.textContent = currentTime
+                $time.textContent = currentTime;
 
                 if (currentTime === 0) {
                     clearInterval(intervalId)
                     gameOver()
                 }
+
+                    const $lastWord = $paragraph.querySelector('x-word:last-child');
+                    const allLettersCorrect = !$lastWord.querySelector('x-letter:not(.correct)');
+
+                    // Si la última palabra está completamente escrita y no quedan letras incorrectas, se termina el juego
+                    if (allLettersCorrect) {
+                        clearInterval(intervalId);
+                        gameOver();
+                    }
+                
             }, 1000)
         }
     })
@@ -275,12 +278,9 @@ function gameOver() {
 // Función para actualizar la lista de palabras según el número especificado
 function updateWordList(count) {
     // Coge el texto al azar y usa la cantidad seleccionada de palabras
-    console.log(count);
     words = INITIAL_WORDS.toSorted(
         () => Math.random() - 0.5
     ).slice(0, count);
-    
-    console.log(words);
 
     // Actualiza el contenido del párrafo con las nuevas palabras
     $paragraph.innerHTML = words.map(word => {
@@ -296,4 +296,5 @@ function updateWordList(count) {
     const $firstWord = $paragraph.querySelector('x-word');
     $firstWord.classList.add('active');
     $firstWord.querySelector('x-letter').classList.add('active'); // Selecciono la primera letra de la primera palabra
+    $input.addEventListener('keydown', initEvents, { once: true });
 }
