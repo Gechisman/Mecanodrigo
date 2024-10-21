@@ -85,8 +85,6 @@ function setupTimeButtons() {
     });
 }
 
-
-
 function setupWordCountButtons(){
     wordCountButtons.forEach(button => {
         button.addEventListener('click', () => {

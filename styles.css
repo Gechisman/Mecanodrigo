@@ -3,17 +3,25 @@
     --green: #00b755;
     --yellow: #daaf38;
     --red: #ca4754;
-    --black: #222;
-    --dark-black: #1a1919;
-    --gray: #999;
-    --sub-color: #646669;
-    --sub-alt-color: #2c2e31;
+    --background-color: #222;
+    --rowColor: #1a1919;
+    --text-color: #999999;
+    --modal-text-color: #646669;
+    --popup-shadow: #2c2e31;
 
     --roundness: .5rem;
 }
 
+[data-theme="light"] {
+    --background-color: #eaeaea;
+    --rowColor: #f0f0f0;
+    --text-color: #222;
+    --modal-text-color: #555;
+    --popup-shadow: rgba(0, 0, 0, 0.1);
+}
+
 body{
-    background-color: var(--black);
+    background-color: var(--background-color);
     font-family: Menlo, monospace;
     font-size: 20px;
 
@@ -30,7 +38,8 @@ header, footer {
     justify-content: space-between;
     align-items: center;
     padding: 8px;
-    background-color: var(--dark-gray);
+    background-color: var(--gray);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 footer{
@@ -62,7 +71,7 @@ footer{
 .text{
     font-family: Lexend Deca, sans-serif;
     font-weight: unset;
-    color: rgb(255, 250, 244);
+    color: var(--text-color);
 }
 
 .icon{
@@ -70,16 +79,20 @@ footer{
     padding-top: 5px;
 }
 
-nav a {
+
+
+nav {
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
     text-decoration: none;
-    color: var(--white);
     font-size: 1.2rem;
 }
 
 nav a i {
     margin-left: 8px; /* Espacio entre el icono y el borde */
+    color: var(--text-color);
 }
 
 main {
@@ -129,7 +142,7 @@ p{
 }
 
 x-letter{
-    color: var(--gray);
+    color: var(--text-color);
     position: relative; /*Para que "|" se coloque en base a la letra y mno al body*/
 
     /*Si la letra está activa, coloca delante esto:*/
@@ -182,6 +195,7 @@ h3 {
 
 button {
     background: transparent;
+    color: var(--text-color);
     border: 0;
     padding: 10px;
     padding-block: 20px;
@@ -242,7 +256,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--dark-black);
+    background: var(--rowColor);
     border-radius: var(--roundness);
 }
 
@@ -289,7 +303,7 @@ button .fas, button .far, button .fab, .button .fas, .button .far, .button .fab,
     max-width: 100%;
     max-height: 100%;
     margin: 0;
-    background: #00000080;
+    background: var(--background-color);
     position: fixed;
     left: 0;
     top: 0;
@@ -304,7 +318,7 @@ button .fas, button .far, button .fab, .button .fas, .button .far, .button .fab,
 }
 
 .popupWrapper .modal, .modalWrapper .modal {
-    background: var(--black);
+    background: var(--background-color);
     border-radius: var(--roundness);
     padding: 2rem;
     display: grid;
@@ -312,14 +326,14 @@ button .fas, button .far, button .fab, .button .fas, .button .far, .button .fab,
     width: 100%;
     max-height: 100%;
     max-width: 300px;
-    color: var(--gray);
+    color: var(--text-color);
     overflow-y: auto;
-    box-shadow: 0 0 0 .2em var(--sub-alt-color);
+    box-shadow: 0 0 0 .2em var(--popup-shadow);
 }
 
 .popupWrapper .modal, .modalWrapper .modal {
     scrollbar-width: thin;
-    scrollbar-color: var(--sub-color) transparent;
+    scrollbar-color: var(--modal-text-color) transparent;
 }
 
 #customWordAmountModal .modal {
@@ -328,7 +342,7 @@ button .fas, button .far, button .fab, .button .fas, .button .far, .button .fab,
 
 .popupWrapper .modal>.title, .modalWrapper .modal>.title {
     font-size: 1.5rem;
-    color: var(--sub-color);
+    color: var(--modal-text-color);
 }
 
 input[type=number] {
@@ -339,7 +353,7 @@ input[type=number] {
 
 #customWordAmountModal .modal .tip {
     font-size: .75rem;
-    color: var(--gray);
+    color: var(--text-color);
 }
 
 #game{
@@ -352,6 +366,31 @@ input[type=number] {
 
 #app{
     padding-block: .5rem;
+}
+
+.switch {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-color);
+    font-size: 1.2rem;
+}
+
+.switch .span{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    background: none;
+    color: var(--white);
+}
+
+.switch:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
 }
 
 @keyframes blink {
