@@ -1,4 +1,4 @@
-import { words as INITIAL_WORDS } from "./data.js";
+import { words as INITIAL_WORDS } from "../data.js";
 
 const $time = document.querySelector('time')
 const $paragraph = document.querySelector('p')
@@ -27,7 +27,7 @@ let selectedTime;
 
 const customWordForm = document.getElementById('wordPopup');
 
-const INITIAL_TIME = 10; //Tiempo inicial
+const INITIAL_TIME = 30; //Tiempo inicial
 let elapsedTime = 0; // Registrar el tiempo transcurrido
 
 let words = []; //Aquí van a ir todas las palabras que hay que escribir

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/teclado.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Mecanodrigo</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="app" class="content-grid">
+        <header>
+            <a id="logo" href="/">
+                <div class="icon"><i class="fa-solid fa-keyboard"></i></div>
+                <h1 class="text">mecanodrigo</h1>
+            </a>
+            <nav>
+                <button class="switch" id="switch">
+                    <span><i class="fa-regular fa-sun"></i></span>
+                    <span><i class="fa-regular fa-moon"></i></span>
+                    <span class="tooltip"></span>
+                </button>
+                <a id="login-link" href="login.html" title="Inicio de sesión">
+                    <i class="far fa-user"></i> <!-- Icono de monigote -->
+                </a>
+            </nav>                
+        </header>
+        <main>
+            <div class="auth-container">
+                <h2>Registro</h2>
+                <form id="registerForm">
+                    <label for="registerUsername">Usuario:</label>
+                    <input type="text" id="registerUsername" name="username" required>
+                    <label for="registerEmail">Correo electrónico:</label>
+                    <input type="email" id="registerEmail" name="email" required>
+                    <label for="registerPassword">Contraseña:</label>
+                    <input type="password" id="registerPassword" name="password" required>
+                    <button type="submit">Registrarse</button>
+                </form>
+        
+                <h2>Inicio de Sesión</h2>
+                <form id="loginForm">
+                    <label for="loginUsername">Usuario o Correo:</label>
+                    <input type="text" id="loginUsername" name="username" required>
+                    <label for="loginPassword">Contraseña:</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                    <button type="submit">Iniciar Sesión</button>
+                </form>
+        
+                <div id="message"></div>
+            </div>
+        </main>
+        <footer id="footer"></footer>
+    </div>
+    <script src="../js/darkMode.js"></script>
+</body>
+</html>
