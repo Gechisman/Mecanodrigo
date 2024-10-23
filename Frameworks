@@ -1,0 +1,5 @@
+express: Framework para crear el servidor web.
+mssql: Driver para conectarse a una base de datos SQL Server.
+bcrypt: Biblioteca para encriptar las contraseñas.
+jsonwebtoken: Para generar y validar tokens JWT (para la autenticación basada en tokens).
+dotenv: Para manejar variables de entorno de manera segura.
