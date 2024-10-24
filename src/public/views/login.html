@@ -29,22 +29,30 @@
         <main>
             <div class="auth-container">
                 <h2>Registro</h2>
-                <form id="registerForm">
+                <form id="registerForm" action="/register" method="POST">
                     <label for="registerUsername">Usuario:</label>
                     <input type="text" id="registerUsername" name="username" required>
+
                     <label for="registerEmail">Correo electrónico:</label>
                     <input type="email" id="registerEmail" name="email" required>
+
                     <label for="registerPassword">Contraseña:</label>
                     <input type="password" id="registerPassword" name="password" required>
+
+                    <label for="passwordConfirm">Contraseña:</label>
+                    <input type="password" id="passwordConfirm" name="passwordConfirm" required>
+                    
                     <button type="submit">Registrarse</button>
                 </form>
         
                 <h2>Inicio de Sesión</h2>
-                <form id="loginForm">
+                <form id="loginForm" action="/login" method="POST">
                     <label for="loginUsername">Usuario o Correo:</label>
                     <input type="text" id="loginUsername" name="username" required>
+
                     <label for="loginPassword">Contraseña:</label>
                     <input type="password" id="loginPassword" name="password" required>
+                    
                     <button type="submit">Iniciar Sesión</button>
                 </form>
         
@@ -54,5 +62,6 @@
         <footer id="footer"></footer>
     </div>
     <script src="../js/darkMode.js"></script>
+    <script src="../js/register.js"></script>
 </body>
 </html>
