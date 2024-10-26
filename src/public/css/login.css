@@ -1,0 +1,75 @@
+/* Estilo básico para el contenedor principal */
+.auth-container {
+    display: flex; /* Usar flexbox para colocar los formularios uno al lado del otro */
+    justify-content: space-between; /* Distribuir espacio entre los formularios */
+    gap: 50px; /* Espacio entre los formularios */
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px; /* Limitar el ancho total del contenedor */
+    margin: 0 auto; /* Centrar el contenedor */
+}
+
+/* Estilo para cada formulario */
+.registerContainer, .loginContainer {
+    flex: 1; /* Asignar el mismo espacio a cada formulario */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px var(--yellow);
+}
+
+label{
+    color: var(--text-color)
+}
+
+h2{
+    margin-bottom: 1rem;
+    color: var(--yellow)
+}
+
+/* Hacer que los formularios ocupen el 100% del contenedor */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label, form input, form button {
+    margin-bottom: 1rem;
+    font-size: 16px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid var(--yellow);
+}
+
+/* Estilo del botón */
+button {
+    padding: 10px;
+    border: 2px solid var(--yellow);
+    color: var(--yellow);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: .1rem;
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+}
+
+h2 {
+    opacity: .8;
+}
+
+form button:hover {
+    background-color: var(--yellow);
+    color: var(--rowColor);
+}
+
+/* Para pantallas más pequeñas (móviles) */
+@media (max-width: 768px) {
+    .auth-container {
+        flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+    }
+}

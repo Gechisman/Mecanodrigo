@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Mecanodrigo</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -28,33 +29,37 @@
         </header>
         <main>
             <div class="auth-container">
-                <h2>Registro</h2>
-                <form id="registerForm" action="/register" method="POST">
-                    <label for="registerUsername">Usuario:</label>
-                    <input type="text" id="registerUsername" name="username" required>
+                <div class="registerContainer">
+                    <h2><i class="fa-solid fa-user-plus"></i> Sign Up</h2>
+                    <form class="registerForm" id="registerForm" action="/register" method="POST">
+                        <!-- <label for="registerUsername">Usuario:</label> -->
+                        <input placeholder="User" type="text" id="registerUsername" name="username" required>
 
-                    <label for="registerEmail">Correo electrónico:</label>
-                    <input type="email" id="registerEmail" name="email" required>
+                        <!-- <label for="registerEmail">Correo electrónico:</label> -->
+                        <input placeholder="Email" type="email" id="registerEmail" name="email" required>
 
-                    <label for="registerPassword">Contraseña:</label>
-                    <input type="password" id="registerPassword" name="password" required>
+                        <!-- <label for="registerPassword">Contraseña:</label> -->
+                        <input placeholder="Password" type="password" id="registerPassword" name="password" required>
 
-                    <label for="passwordConfirm">Contraseña:</label>
-                    <input type="password" id="passwordConfirm" name="passwordConfirm" required>
-                    
-                    <button type="submit">Registrarse</button>
-                </form>
+                        <!-- <label for="passwordConfirm">Contraseña:</label> -->
+                        <input placeholder="Confirm password" type="password" id="passwordConfirm" name="passwordConfirm" required>
+                        
+                        <button type="submit"><i class="fa-solid fa-user-plus"></i> Sign Up</button>
+                    </form>
+                </div>
         
-                <h2>Inicio de Sesión</h2>
-                <form id="loginForm" action="/login" method="POST">
-                    <label for="loginUsername">Usuario o Correo:</label>
-                    <input type="text" id="loginUsername" name="username" required>
+                <div class="loginContainer">
+                    <h2><i class="fa-solid fa-user"></i> Log In</h2>
+                    <form class="loginForm" id="loginForm" action="/login" method="POST">
+                        <!-- <label for="loginUsername">Usuario o Correo:</label> -->
+                        <input placeholder="User or email" type="text" id="loginUsername" name="username" required>
 
-                    <label for="loginPassword">Contraseña:</label>
-                    <input type="password" id="loginPassword" name="password" required>
-                    
-                    <button type="submit">Iniciar Sesión</button>
-                </form>
+                        <!-- <label for="loginPassword">Contraseña:</label> -->
+                        <input placeholder="Password" type="password" id="loginPassword" name="password" required>
+                        
+                        <button type="submit"><i class="fa-solid fa-user"></i> login</button>
+                    </form>
+                </div>
         
                 <div id="message"></div>
             </div>

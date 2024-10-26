@@ -401,3 +401,85 @@ input[type=number] {
         opacity: 0;
     }
 }
+
+/* Media Queries*/
+/* Diseño base para pantallas grandes */
+@media (min-width: 1024px) {
+    .content-grid {
+        max-width: 1200px;
+        grid-template-rows: auto 1fr auto; /* Header y footer automáticos */
+    }
+}
+
+/* Para tabletas (pantallas medianas) */
+@media (max-width: 1024px) {
+    .auth-container {
+        flex-direction: column; /* Apilar formularios de registro e inicio de sesión en columnas */
+        align-items: center;
+        justify-content: center;
+    }
+
+    .registerContainer, .loginContainer {
+        max-width: 80%; /* Limitar el ancho */
+    }
+
+    main {
+        padding: 16px;
+        height: auto; /* Permitir que el contenido sea más flexible */
+    }
+
+    section {
+        max-width: 90%;
+    }
+}
+
+/* Para pantallas móviles */
+@media (max-width: 768px) {
+    body {
+        font-size: 18px; /* Reducir un poco el tamaño del texto */
+    }
+
+    main {
+        padding: 12px;
+    }
+
+    .registerContainer, .loginContainer {
+        max-width: 100%; /* Que los formularios ocupen todo el ancho en móviles */
+        padding: 12px;
+        margin-bottom: 16px;
+    }
+
+    section {
+        padding: 10px;
+        max-width: 100%; /* Que los formularios y secciones sean más fluidos */
+    }
+
+    #logo h1 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        padding: 8px;
+        font-size: 16px;
+    }
+}
+
+/* Para pantallas extra pequeñas (móviles en vertical) */
+@media (max-width: 480px) {
+    header, footer {
+        padding: 4px;
+    }
+
+    nav a {
+        font-size: 1rem;
+    }
+
+    time {
+        font-size: 20px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
+
