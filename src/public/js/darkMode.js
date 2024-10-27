@@ -1,7 +1,6 @@
 
 //Light / Night Mode
 const switchButton = document.getElementById('switch');
-const tooltip = switchButton.querySelector('.tooltip');
 
 // Verifica si hay un tema guardado en el Local Storage
 const currentTheme = localStorage.getItem('theme') || 'dark';
@@ -31,10 +30,8 @@ function updateSwitchIcon(theme) {
     if (theme === 'light') {
         sunIcon.style.display = 'none';
         moonIcon.style.display = 'inline';
-        tooltip.textContent = 'Dark mode';
     } else {
         sunIcon.style.display = 'inline';
         moonIcon.style.display = 'none';
-        tooltip.textContent = 'Light mode';
     }
 }

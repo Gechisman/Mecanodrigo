@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config(); // Cargar variables de entorno
 const path = require('path'); // Importar el módulo path
+const session = require('express-session'); //Para guardar la sesion
 
 const app = express();
 
@@ -8,6 +9,17 @@ const config = require('./config');
 app.set('port', config.port)
 app.set('database', config.database)
 app.set('config', config);
+
+// Configura las sesiones
+app.use(session({
+    secret: 'supersecretkey', // Cambia esto a un valor seguro
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        secure: false,  // Cambia esto a true si usas HTTPS
+        maxAge: 7 * 24 * 60 * 60 * 1000 // 7 días en milisegundos
+    }
+}));
 
 // Middleware
 app.use(express.json());

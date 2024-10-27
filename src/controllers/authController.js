@@ -49,14 +49,13 @@ const register = async (req, res) => {  // Verificar los valores de configuraci�
         request.input('email', mssql.NVarChar, email);
         request.input('hashedPassword', mssql.NVarChar, hashedPassword);
 
-        const result = await request.query(query);
-        res.status(201).send('Usuario registrado correctamente');
+        await request.query(query);
 
-        // const datosRegister = result.recordset[0]
-        // console.log('datos1: ', datosRegister)
-        // res.render("index", {
-        //     datosRegister: datosRegister
-        // })
+        req.session.username = username;
+        req.session.userId = id;
+        console.log('Usuario: ', req.session.username);
+        console.log('Id: ', req.session.userId);
+        res.redirect('/');
     } catch (error) {
         if (error.number === 2627) { // Código de error para violación de clave única
             return res.status(400).send('El usuario o correo electrónico ya está registrado');
@@ -84,24 +83,72 @@ const login = async (req, res) => {
 
         const result = await request.query(query);
         const user = result.recordset[0];
-        console.log('User: ' + user);
+
         if (!user) return res.status(404).send('Usuario no encontrado');
 
         // Comparar la contraseña
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) return res.status(401).send('Contraseña incorrecta');
 
-        // Generar token JWT
-        const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY);
-        res.status(200).json({ token });
+        req.session.username = user.username;
+        req.session.userId = user.id;
+        console.log('Usuario: ', req.session.username);
+        console.log('Id: ', req.session.userId);
+        res.redirect('/');
     } catch (error) {
         console.error(error);
         res.status(500).send('Error en el inicio de sesión');
     }
 };
 
+const logout = (req, res) => {
+    try {
+        req.session.destroy()
+        res.redirect('/');
+        console.log('Sesion cerrada correctamente');
+    } catch (error) {
+        res.redirect('/');
+        console.log('Error: ', error);
+    }
+}
+
+const saveResult = async (req, res) => {
+    const { accuracy, wpm } = req.body; // Recibe la precisión y WPM desde el frontend
+    const userId = req.session.userId; // Usa el ID del usuario desde la sesión
+    
+    try {
+        // Asegurarte de que el usuario tiene sesión iniciada
+        if (!userId) {
+            return res.status(401).send('Usuario no autenticado');
+        }
+
+        let pool = await mssql.connect(database.get_config(req.app.get("config").database));
+        
+        // Insertar la puntuación en la tabla Results
+        let query = `
+            INSERT INTO ${req.app.get("config").database}.[dbo].[Results] (userId, accuracy, wpm, dateScore)
+            VALUES (@userId, @accuracy, @wpm, FORMAT(SYSDATETIMEOFFSET(), 'yyyy-MM-dd HH:mm:ss'));
+        `;
+
+        const request = pool.request();
+        request.input('userId', mssql.Int, userId);
+        request.input('accuracy', mssql.Decimal(5, 2), accuracy);
+        request.input('wpm', mssql.Decimal(5, 2), wpm);
+
+        await request.query(query);
+        
+        res.status(200).send('Puntuación guardada correctamente');
+    } catch (error) {
+        console.error('Error al guardar la puntuación:', error);
+        res.status(500).send('Error al guardar la puntuación');
+    }
+};
+
+
 module.exports = {
     seeUsers: seeUsers,
     register: register,
-    login: login
+    login: login,
+    logout: logout,
+    saveResult: saveResult
 }

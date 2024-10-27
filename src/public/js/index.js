@@ -309,6 +309,25 @@ function gameOver() {
     const wpm = elapsedTime > 0
         ? (correctWords * 60) / elapsedTime
         : 0;
+
+        // Guardar los resultados en el backend
+    fetch('/save-result', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            accuracy: accuracy.toFixed(2),
+            wpm: wpm.toFixed(2)
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Puntuación guardada:', data);
+    })
+    .catch(error => {
+        console.error('Error al guardar la puntuación:', error);
+    });
     
     $wpm.textContent = wpm.toFixed(2);
     $accuracy.textContent = `${accuracy.toFixed(2)}%`

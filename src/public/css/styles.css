@@ -193,6 +193,10 @@ h3 {
     color: var(--yellow);
 }
 
+h4{
+    color: var(--text-color);
+}
+
 button {
     background: transparent;
     color: var(--text-color);
@@ -391,6 +395,10 @@ input[type=number] {
 .switch:hover .tooltip {
     opacity: 1;
     visibility: visible;
+}
+
+.logout{
+    color: var(--red);
 }
 
 @keyframes blink {
