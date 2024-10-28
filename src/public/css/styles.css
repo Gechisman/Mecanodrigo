@@ -1,13 +1,15 @@
 :root{
     color-scheme: light dark;
     --green: #00b755;
-    --yellow: #daaf38;
+    --yellow: #edbe3d;
     --red: #ca4754;
     --background-color: #222;
     --rowColor: #1a1919;
     --text-color: #999999;
     --modal-text-color: #646669;
     --popup-shadow: #2c2e31;
+    --white-color: rgb(255, 255, 255);
+    --white: rgb(255, 255, 255, .5);
 
     --roundness: .5rem;
 }
@@ -18,6 +20,8 @@
     --text-color: #222;
     --modal-text-color: #555;
     --popup-shadow: rgba(0, 0, 0, 0.1);
+    --white: #000;
+    --white-color: #000;
 }
 
 body{
@@ -78,8 +82,6 @@ footer{
     color: var(--yellow);
     padding-top: 5px;
 }
-
-
 
 nav {
     display: flex;
