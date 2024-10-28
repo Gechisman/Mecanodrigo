@@ -1,0 +1,6 @@
+{
+    "watch": ["src/", "public/", "views/"],
+    "ext": "js,css,ejs",
+    "ignore": ["node_modules/"],
+    "exec": "node src/start.js"
+  }  

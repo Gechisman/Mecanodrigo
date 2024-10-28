@@ -1,6 +1,7 @@
 const database = require('../database/database');
 
 const bcrypt = require('bcrypt');
+const session = require('express-session');
 const jwt = require('jsonwebtoken');
 const mssql = require('mssql');
 
@@ -95,6 +96,7 @@ const login = async (req, res) => {
         console.log('Usuario: ', req.session.username);
         console.log('Id: ', req.session.userId);
         res.redirect('/');
+        // res.render('index', { username: req.session.username });
     } catch (error) {
         console.error(error);
         res.status(500).send('Error en el inicio de sesión');
@@ -144,11 +146,39 @@ const saveResult = async (req, res) => {
     }
 };
 
+const leaderboardScore = async (req, res) => {
+    try {
+        let pool = await mssql.connect(database.get_config(req.app.get("config").database));
+        
+        // Insertar la puntuación en la tabla Results
+        let query = `
+            SELECT Users.username, results.accuracy, results.wpm, results.dateScore 
+            FROM ${req.app.get("config").database}.[dbo].[results] 
+            JOIN ${req.app.get("config").database}.[dbo].[Users] 
+            ON results.userId = Users.id
+            ORDER BY Results.wpm DESC
+        `;
+
+        const result = await pool.query(query);
+        const datos = result.recordsets[0]
+
+        console.log('datosLeader: ', datos);
+
+        res.render("leaderboard", {
+            username: req.session.username || '',
+            datos: JSON.stringify(datos)
+        })
+        
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 module.exports = {
     seeUsers: seeUsers,
     register: register,
     login: login,
     logout: logout,
-    saveResult: saveResult
+    saveResult: saveResult,
+    leaderboardScore: leaderboardScore
 }

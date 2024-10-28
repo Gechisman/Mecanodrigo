@@ -6,8 +6,7 @@
     "express": "^4.21.1",
     "express-session": "^1.18.1",
     "jsonwebtoken": "^9.0.2",
-    "mssql": "^11.0.1",
-    "tabulator-tables": "^6.3.0"
+    "mssql": "^11.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"
