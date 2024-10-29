@@ -1,13 +1,9 @@
 const database = require('../database/database');
 
 const bcrypt = require('bcrypt');
-const session = require('express-session');
-const jwt = require('jsonwebtoken');
 const mssql = require('mssql');
 
 const seeUsers = async (req, res) => {
-    //Devuelve el puerto y la database (config.js)
-        console.log('Config: ', req.app.get("config").database);  // Verificar los valores de configuración
     try {
         let pool = await mssql.connect(database.get_config(req.app.get("config").database));
         let query = `
@@ -15,10 +11,8 @@ const seeUsers = async (req, res) => {
             FROM ${req.app.get("config").database}.[dbo].[Users]`;
         
         const result = await pool.query(query);
-        console.log('query: ' + query);
 
         const datos = result.recordset[0]
-        console.log('datos1: ', datos)
         res.render("index", {
             datos: datos
         })
@@ -43,19 +37,22 @@ const register = async (req, res) => {  // Verificar los valores de configuraci�
         let pool = await mssql.connect(database.get_config(req.app.get("config").database));
         let query = `
             INSERT INTO ${req.app.get("config").database}.[dbo].[Users] (username, email, password)
+            OUTPUT inserted.id
             VALUES (@username, @Email, @hashedPassword)`;
-        
+            
         const request = pool.request();
         request.input('username', mssql.NVarChar, username);
         request.input('email', mssql.NVarChar, email);
         request.input('hashedPassword', mssql.NVarChar, hashedPassword);
 
-        await request.query(query);
+        const result = await request.query(query);
+
+        const userId = result.recordset[0].id;
 
         req.session.username = username;
-        req.session.userId = id;
-        console.log('Usuario: ', req.session.username);
-        console.log('Id: ', req.session.userId);
+        req.session.userId = userId;
+        // console.log('Usuario: ', req.session.username);
+        // console.log('Id: ', req.session.userId);
         res.redirect('/');
     } catch (error) {
         if (error.number === 2627) { // Código de error para violación de clave única
@@ -66,7 +63,6 @@ const register = async (req, res) => {  // Verificar los valores de configuraci�
     }  
 };
 
-// Iniciar sesión de usuario
 const login = async (req, res) => {
     const { username, password } = req.body;
 
@@ -93,8 +89,8 @@ const login = async (req, res) => {
 
         req.session.username = user.username;
         req.session.userId = user.id;
-        console.log('Usuario: ', req.session.username);
-        console.log('Id: ', req.session.userId);
+        // console.log('Usuario: ', req.session.username);
+        // console.log('Id: ', req.session.userId);
         res.redirect('/');
         // res.render('index', { username: req.session.username });
     } catch (error) {
@@ -107,7 +103,6 @@ const logout = (req, res) => {
     try {
         req.session.destroy()
         res.redirect('/');
-        console.log('Sesion cerrada correctamente');
     } catch (error) {
         res.redirect('/');
         console.log('Error: ', error);
@@ -151,22 +146,36 @@ const leaderboardScore = async (req, res) => {
         let pool = await mssql.connect(database.get_config(req.app.get("config").database));
         
         // Insertar la puntuación en la tabla Results
-        let query = `
+        let queryToday = `
             SELECT Users.username, results.accuracy, results.wpm, results.dateScore 
             FROM ${req.app.get("config").database}.[dbo].[results] 
             JOIN ${req.app.get("config").database}.[dbo].[Users] 
             ON results.userId = Users.id
-            ORDER BY Results.wpm DESC
+            WHERE CAST(results.dateScore AS DATE) = CAST(GETDATE() AS DATE)  -- Comparar solo la fecha
+            ORDER BY results.wpm DESC, results.accuracy DESC
         `;
 
-        const result = await pool.query(query);
-        const datos = result.recordsets[0]
+        let queryAllTime = `
+            SELECT Users.username, results.accuracy, results.wpm, results.dateScore 
+            FROM ${req.app.get("config").database}.[dbo].[results] 
+            JOIN ${req.app.get("config").database}.[dbo].[Users] 
+            ON results.userId = Users.id
+            ORDER BY results.wpm DESC, results.accuracy DESC
+        `;
 
-        console.log('datosLeader: ', datos);
+        const resultToday  = await pool.query(queryToday);
+        const resultAllTime  = await pool.query(queryAllTime);
+
+        const datosToday  = resultToday .recordsets[0]
+        const datosAllTime = resultAllTime.recordsets[0];
+
+        // console.log('datosToday: ', datosToday );
+        // console.log('datosAllTime: ', datosAllTime);
 
         res.render("leaderboard", {
             username: req.session.username || '',
-            datos: JSON.stringify(datos)
+            datosToday: JSON.stringify(datosToday),
+            datosAllTime: JSON.stringify(datosAllTime)
         })
         
     } catch (error) {

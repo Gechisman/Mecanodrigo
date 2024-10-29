@@ -2,6 +2,7 @@
     color-scheme: light dark;
     --green: #00b755;
     --yellow: #edbe3d;
+    --second-yellow: #edbe3d;
     --red: #ca4754;
     --background-color: #222;
     --rowColor: #1a1919;
@@ -22,6 +23,7 @@
     --popup-shadow: rgba(0, 0, 0, 0.1);
     --white: #000;
     --white-color: #000;
+    --second-yellow: #7b631f;
 }
 
 body{

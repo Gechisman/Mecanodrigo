@@ -1,6 +1,6 @@
 window.addEventListener('load', () => {
-    var table = new Tabulator("#tableId", {  // Ajusta la altura según sea necesario
-        data: tableData,  // Usamos los datos que se pasan desde el backend
+    var tableAllTime = new Tabulator("#tableAllTime", {  // Ajusta la altura según sea necesario
+        data: datosAllTime,  // Usamos los datos que se pasan desde el backend
         layout: "fitColumns",
         columns: [
             {title: "#", 
@@ -37,8 +37,6 @@ window.addEventListener('load', () => {
             }
         ],
         rowFormatter:function(row){
-            var data = row.getData(); //get data object for row
-            console.log(data);
             var rowPosition = row.getPosition();
             if (rowPosition === 1) {
                 row.getElement().style.background = "rgba(255, 255, 0, 0.8)";
@@ -54,8 +52,8 @@ window.addEventListener('load', () => {
             }
         },
     });
-    var table2 = new Tabulator("#tableId2", {  // Ajusta la altura según sea necesario
-        data: tableData,  // Usamos los datos que se pasan desde el backend
+    var tableToday = new Tabulator("#tableToday", {  // Ajusta la altura según sea necesario
+        data: datosToday,  // Usamos los datos que se pasan desde el backend
         layout: "fitColumns",
         columns: [
             {title: "#", formatter:"rownum", hozAlign: "center", width: 50},
@@ -87,15 +85,20 @@ window.addEventListener('load', () => {
                 }
             }
         ],
-    });
-});
-
-document.querySelectorAll('.buttons div').forEach(button => {
-    button.addEventListener('click', () => {
-        // Elimina la clase 'active' de todos los botones
-        document.querySelectorAll('.buttons div').forEach(btn => btn.classList.remove('active'));
-        
-        // Añade la clase 'active' al botón clicado
-        button.classList.add('active');
+        rowFormatter:function(row){
+            var rowPosition = row.getPosition();
+            if (rowPosition === 1) {
+                row.getElement().style.background = "rgba(255, 255, 0, 0.8)";
+                row.getElement().style.color = "#000";
+            } else if (rowPosition === 2) {
+                row.getElement().style.background = "rgba(192, 192, 192, 0.8)";
+                row.getElement().style.color = "#000";
+            } else if (rowPosition === 3) {
+                row.getElement().style.background = "rgba(205, 127, 50, 0.8)";
+                row.getElement().style.color = "#000";
+            } else {
+                row.getElement().style.background = ""; // Restablecer para otras filas
+            }
+        },
     });
 });

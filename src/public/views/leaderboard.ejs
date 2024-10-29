@@ -19,19 +19,17 @@
         <%- include('header') %>
         <main>
             <div class="content">
-                <div class="leaderboardTop">
-                    <h3>Leaderboard</h3>
-                    <div class="buttons">
-                        <div class="allTime active">All time</div>
-                        <div class="today">Today</div>
-                    </div>
+                <div class="buttons">
+                    <div class="allTime active">All time</div>
+                    <div class="today active">Today</div>
                 </div>
                 <div class="tables">
                     <div class="titleAndTable">                        
-                        <div id="tableId"></div>
+                        <div class="tableAllTime" id="tableAllTime"></div>
                     </div>
-                    <div class="titleAndTable">                        
-                        <div id="tableId2"></div>
+                    <div class="titleAndTable">         
+                        <div class="todayMobile active">Today</div>               
+                        <div class="tableToday" id="tableToday"></div>
                     </div>
                 </div>
             </div>
@@ -40,8 +38,8 @@
         <footer id="footer"></footer>
     </div>
     <script type="text/javascript">
-        const tableData = <%- datos %>
-        // console.log('tableData: ', tableData);
+        const datosToday = <%- datosToday %>;
+        const datosAllTime = <%- datosAllTime %>
     </script>
     <script type="text/javascript" src="js/leaderboardTable.js"></script>
     <script src="js/header.js"></script>

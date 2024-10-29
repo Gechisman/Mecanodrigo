@@ -5,22 +5,14 @@
     background-color: var(--background-color);
 }
 
-.leaderboardTop{
+.buttons{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 1rem;
 }
 
-.buttons{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.allTime, .today{
-    cursor: pointer;
-    transition: background .125s, color .125s, opacity .125s;
+.allTime, .today, .todayMobile{
     padding-inline: 2rem;
     padding-block: .5rem;
     border-radius: var(--roundness);
@@ -28,17 +20,20 @@
     
     border: none;
     font-size: 1rem;
-    align-items: baseline;
-    justify-content: center;
     background: var(--rowColor);
-    
-    &:hover{
-        background-color: var(--white);
-        color: var(--rowColor)
-    }
 }
-.allTime{
-    margin-right: 1rem;
+
+.buttons{
+    width: 68%;
+}
+
+.today{
+    display: none;
+}
+
+.todayMobile{
+    width: 12%;
+    margin: 2rem auto;
 }
 
 .active {
@@ -50,10 +45,15 @@
 
 .tables{
     display: flex;
-    justify-content: space-around;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 1.1rem;
     width: 100%;
     margin: 0 auto;
+    margin-top: 2rem;
+}
+
+.titleAndTable {
+    width: 75%; /* Hace que cada tabla ocupe el 50% */
 }
 
 .tabulator .tabulator-table {
@@ -63,6 +63,9 @@
 /* Eliminar bordes de las filas */
 .tabulator .tabulator-row {
     border: none;
+}
+.tabulator .tabulator-cell {
+    padding: 10px 0px; /* Más espacio vertical (10px) y algo de espacio horizontal (5px) */
 }
 
 /* Eliminar bordes de las celdas */
@@ -102,10 +105,6 @@
 .tabulator .tabulator-row{
     background-color: var(--rowColor);
     color: var(--white-color);
-    &:hover{
-        background-color: var(--popup-shadow);
-        color: var(--white-color);
-    }
 }
 
 .tabulator-row.tabulator-row-even {
@@ -116,18 +115,26 @@
     border: none;
 }
 
-/* Estilos para las filas del leaderboard */
-.row-gold {
-    background-color: gold;
-    color: black; /* Ajusta el color del texto si es necesario */
-}
+@media screen and (min-width: 768px) {    
+    .tables {
+        flex-direction: row; /* Cambia a fila en pantallas medianas y grandes */
+        justify-content: space-around;
+        margin-top: 0;
+    }
 
-.row-silver {
-    background-color: silver;
-    color: black; /* Ajusta el color del texto si es necesario */
-}
+    .todayMobile{
+        display: none;
+    }
 
-.row-bronze {
-    background-color: #cd7f32; /* Color bronce */
-    color: white; /* Ajusta el color del texto si es necesario */
+    .today{
+        display: block;
+    }
+
+    .buttons{
+        width: 100%;
+    }
+
+    .titleAndTable {
+        width: 50%; /* Ocupa el 50% en pantallas grandes */
+    }
 }

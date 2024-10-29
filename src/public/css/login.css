@@ -14,7 +14,7 @@
     flex: 1; /* Asignar el mismo espacio a cada formulario */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px var(--yellow);
+    box-shadow: 0 2px 5px var(--second-yellow);
 }
 
 label{
@@ -23,7 +23,7 @@ label{
 
 h2{
     margin-bottom: 1rem;
-    color: var(--yellow)
+    color: var(--second-yellow)
 }
 
 /* Hacer que los formularios ocupen el 100% del contenedor */
@@ -41,14 +41,14 @@ input[type="text"], input[type="email"], input[type="password"] {
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
-    border: 1px solid var(--yellow);
+    border: 1px solid var(--second-yellow);
 }
 
 /* Estilo del botón */
 button {
     padding: 10px;
-    border: 2px solid var(--yellow);
-    color: var(--yellow);
+    border: 2px solid var(--second-yellow);
+    color: var(--second-yellow);
     border-radius: 5px;
     cursor: pointer;
     font-size: 18px;
@@ -63,7 +63,7 @@ h2 {
 }
 
 form button:hover {
-    background-color: var(--yellow);
+    background-color: var(--second-yellow);
     color: var(--rowColor);
 }
 
