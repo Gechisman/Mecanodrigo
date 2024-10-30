@@ -439,6 +439,8 @@ input[type=number] {
 
 /* Para tabletas (pantallas medianas) */
 @media (max-width: 1024px) {
+    
+
     .auth-container {
         flex-direction: column; /* Apilar formularios de registro e inicio de sesión en columnas */
         align-items: center;
@@ -477,7 +479,7 @@ input[type=number] {
 
     section {
         padding: 10px;
-        max-width: 100%; /* Que los formularios y secciones sean más fluidos */
+        max-width: 100%;
     }
 
     #logo h1 {
@@ -500,12 +502,26 @@ input[type=number] {
         font-size: 1rem;
     }
 
+    section{        
+        margin-top: 3rem;
+    }
+
     time {
         font-size: 20px;
+        text-align: center;
     }
 
     button {
         font-size: 14px;
+    }
+
+    footer{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    p{
+        justify-content: center;
     }
 }
 

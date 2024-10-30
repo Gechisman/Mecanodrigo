@@ -1,8 +1,13 @@
 .content{
     width: 100%;
     height: 100%;
-    max-width: 1200px;
-    background-color: var(--background-color);
+    max-width: 370px;
+}
+
+.content-grid{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
 }
 
 .buttons{
@@ -21,10 +26,6 @@
     border: none;
     font-size: 1rem;
     background: var(--rowColor);
-}
-
-.buttons{
-    width: 68%;
 }
 
 .today{
@@ -50,10 +51,6 @@
     width: 100%;
     margin: 0 auto;
     margin-top: 2rem;
-}
-
-.titleAndTable {
-    width: 75%; /* Hace que cada tabla ocupe el 50% */
 }
 
 .tabulator .tabulator-table {
@@ -116,6 +113,13 @@
 }
 
 @media screen and (min-width: 768px) {    
+    .content{
+        width: 100%;
+        height: 100%;
+        max-width: 1200px;
+        background-color: var(--background-color);
+    }
+
     .tables {
         flex-direction: row; /* Cambia a fila en pantallas medianas y grandes */
         justify-content: space-around;

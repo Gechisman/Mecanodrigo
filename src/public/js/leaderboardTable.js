@@ -2,6 +2,9 @@ window.addEventListener('load', () => {
     var tableAllTime = new Tabulator("#tableAllTime", {  // Ajusta la altura según sea necesario
         data: datosAllTime,  // Usamos los datos que se pasan desde el backend
         layout: "fitColumns",
+        pagination: "local",
+        paginationSize: 10,
+        paginationSizeSelector: [10, 25, 50, 100],
         columns: [
             {title: "#", 
                 formatter:"rownum", 
@@ -30,7 +33,7 @@ window.addEventListener('load', () => {
                     
                     // Formatear la fecha
                     var options = { day: 'numeric', month: 'short', year: 'numeric' };
-                    var formattedDate = date.toLocaleDateString('en-GB', options);
+                    var formattedDate = date.toLocaleDateString('es-ES', options);
     
                     return formattedDate; // Devolver la fecha formateada
                 }
