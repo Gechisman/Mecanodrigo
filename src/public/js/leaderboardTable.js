@@ -4,7 +4,6 @@ window.addEventListener('load', () => {
         layout: "fitColumns",
         pagination: "local",
         paginationSize: 10,
-        paginationSizeSelector: [10, 25, 50, 100],
         columns: [
             {title: "#", 
                 formatter:"rownum", 

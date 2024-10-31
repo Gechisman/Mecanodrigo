@@ -112,6 +112,24 @@
     border: none;
 }
 
+.tabulator .tabulator-footer{
+    background-color: var(--rowColor);
+    opacity: 1;
+}
+
+.tabulator .tabulator-footer .tabulator-page:disabled {
+    opacity: .8;
+}
+
+.tabulator .tabulator-footer .tabulator-page{
+    background-color: var(--yellow);
+    color: black;
+}
+
+.tabulator .tabulator-footer .tabulator-page.active {
+    color: black;
+}
+
 @media screen and (min-width: 768px) {    
     .content{
         width: 100%;
