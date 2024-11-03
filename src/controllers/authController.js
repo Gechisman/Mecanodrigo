@@ -147,7 +147,7 @@ const leaderboardScore = async (req, res) => {
         
         // Insertar la puntuación en la tabla Results
         let queryToday = `
-            SELECT Users.username, results.accuracy, results.wpm, results.dateScore 
+            SELECT TOP(10) Users.username, results.accuracy, results.wpm, results.dateScore 
             FROM ${req.app.get("config").database}.[dbo].[results] 
             JOIN ${req.app.get("config").database}.[dbo].[Users] 
             ON results.userId = Users.id
@@ -156,7 +156,7 @@ const leaderboardScore = async (req, res) => {
         `;
 
         let queryAllTime = `
-            SELECT Users.username, results.accuracy, results.wpm, results.dateScore 
+            SELECT TOP(10) Users.username, results.accuracy, results.wpm, results.dateScore 
             FROM ${req.app.get("config").database}.[dbo].[results] 
             JOIN ${req.app.get("config").database}.[dbo].[Users] 
             ON results.userId = Users.id

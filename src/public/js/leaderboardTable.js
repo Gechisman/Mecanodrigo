@@ -2,12 +2,15 @@ window.addEventListener('load', () => {
     var tableAllTime = new Tabulator("#tableAllTime", {  // Ajusta la altura según sea necesario
         data: datosAllTime,  // Usamos los datos que se pasan desde el backend
         layout: "fitColumns",
-        pagination: "local",
-        paginationSize: 10,
         columns: [
-            {title: "#", 
-                formatter:"rownum", 
-                hozAlign: "center", 
+            {
+                title: "#",
+                formatter: function(cell) {
+                    var row = cell.getRow();
+                    var rowIndex = row.getPosition(true); // Obtiene la posición global en la tabla
+                    return rowIndex; // Devuelve el índice global en lugar del índice de la página
+                },
+                hozAlign: "center",
                 width: 50
             },
             {title: "Username", field: "username", hozAlign: "center",  width: 150},
