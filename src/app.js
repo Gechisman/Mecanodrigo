@@ -12,7 +12,7 @@ app.set('config', config);
 
 // Configura las sesiones
 app.use(session({
-    secret: 'supersecretkey', // Cambia esto a un valor seguro
+    secret: process.env.SECRET_KEY, // Cambia esto a un valor seguro
     resave: false,
     saveUninitialized: true,
     cookie: {

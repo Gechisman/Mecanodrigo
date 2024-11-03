@@ -1,9 +1,9 @@
 // Función para obtener la configuración de la conexión a SQL Server
 const get_config = (database) => {
     return {
-        user: 'rodrigoDev',  // Tu usuario de SQL Server
-        password: 'C4poaltower',    // Tu contraseña de SQL Server
-        server: 'PC-RODRIGO', // El nombre de tu servidor SQL Server
+        user: process.env.DB_USER,  // Tu usuario de SQL Server
+        password: process.env.DB_PASSWORD,    // Tu contraseña de SQL Server
+        server: process.env.DB_SERVER, // El nombre de tu servidor SQL Server
         database: database,
         pool: {
             max: 10,
