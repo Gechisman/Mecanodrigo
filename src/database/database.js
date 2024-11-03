@@ -11,7 +11,7 @@ const get_config = (database) => {
             idleTimeoutMillis: 30000
         },  // Nombre de la base de datos que se pasa dinámicamente
         options: {
-            encrypt: false,  // Establece en false para instancias locales
+            encrypt: true,  // Establece en false para instancias locales
             trustServerCertificate: true  // Necesario para conexiones locales a SQL Server
         }
     }
