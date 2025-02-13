@@ -11,17 +11,20 @@
             <span><i class="fa-regular fa-moon"></i></span>
         </button>
 
+        <!--
         <a class="leaderboard" id="leaderboard" href="/leaderboard">
             <div><i class="fa-solid fa-chart-line"></i></div>
         </a>
-        
-            <% if (username && username.length > 0) { %> <!-- Verificamos si username no está vacío -->
-                <h4>Bienvenido <%= username %>!</h4>
-                <a href="/logout"><i class="fa fa-sign-out logout"></i></a>
-            <% } else { %>
-                <a class="user" id="login-link" href="views/login.html" title="Inicio de sesión">
-                    <i class="far fa-user"></i> <!-- Icono de monigote -->
-                </a>
-            <% } %>   
+         
+    <% if (username && username.length > 0) { %> 
+        <h4>Bienvenido <%= username %>!</h4>
+        <a href="/logout"><i class="fa fa-sign-out logout"></i></a>
+    <% } else { %>
+        <a class="user" id="login-link" href="views/login.html" title="Inicio de sesión">
+            <i class="far fa-user"></i> 
+        </a>
+    <% } %> 
+-->
+     
     </nav>                
 </header>
